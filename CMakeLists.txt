@@ -48,7 +48,7 @@ endif("${isSystemDir}" STREQUAL "-1")
 #------------------------------------------------------------------------------------------------------------
 
 # Configure the header file to pass the version number to the source code
-configure_file(rpppConfig.h.in rpppConfig.h)
+configure_file(theeyeConfig.h.in theeyeConfig.h)
 
 # add the executable
 add_executable(${CMAKE_PROJECT_NAME} main.cpp)
@@ -59,13 +59,13 @@ target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_BINARY_DIR})
 
 # target_include_directories(temp PUBLIC "${PROJECT_BINARY_DIR}") #example to add new executable : Step2
 
-# setings for modules dir
-set(MODULES_DIR ${CMAKE_SOURCE_DIR}/modules)
-add_subdirectory(${MODULES_DIR})
-
 # settings for external dir
 set(EXTERNAL_DIR ${CMAKE_SOURCE_DIR}/external)
 add_subdirectory(${EXTERNAL_DIR})
+
+# setings for modules dir
+set(MODULES_DIR ${CMAKE_SOURCE_DIR}/modules)
+add_subdirectory(${MODULES_DIR})
 
 target_include_directories(${PROJECT_NAME} PUBLIC ${EXTRA_INCLUDE_DIRS}) 
 # 
@@ -83,7 +83,7 @@ target_link_libraries(${PROJECT_NAME} PUBLIC ${EXTRA_LINKS})
 # add the install targets
 install(TARGETS ${CMAKE_PROJECT_NAME} DESTINATION bin)
 # install(TARGETS temp DESTINATION bin) # install the new executable : Step4 (installation)
-install(FILES "${PROJECT_BINARY_DIR}/rpppConfig.h" DESTINATION include)
+install(FILES "${PROJECT_BINARY_DIR}/theeyeConfig.h" DESTINATION include)
 # ---------------------- Installing End ------------------------
 
 
