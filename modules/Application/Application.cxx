@@ -6,7 +6,7 @@ Application* Application :: applicationInstance = nullptr;
 Application* Application :: Instance(){
   if(applicationInstance == nullptr){
     Application::applicationInstance = new Application();
-  }
+  };
   return Application :: applicationInstance;
 }
 
@@ -15,29 +15,25 @@ Application :: Application(){
     try{
       if(SDL_Init(SDL_INIT_FLAGS) != 0){
         throw ApplicationException(SDL_GetError());
-      }
-      else{
+      }else{
         this->window = new Window("Test Window", 640, 480);
       };
-    }
-    catch(ApplicationException& exception){
+    }catch(ApplicationException& exception){
       std :: cout << "Application Error : ";
       #ifndef NDEBUG
-        std :: cout << "Line 20 in Application.cpp: ";
+        std :: cout << "Line 16 in Application.cpp: "; // SDL_Init()
       #endif // NDEBUG
       std :: cout << exception.what() << std :: endl;
-    }
-    catch(WindowException& exception){
+    }catch(WindowException& exception){
       std :: cout << "Window Error : ";
       #ifndef NDEBUG // or _DEBUG
-        std :: cout << "Line 4 in Window.cpp: ";
+        std :: cout << "Line 4 in Window.cpp: "; //vSDL_CreateWindow()
       #endif // NDEBUG
       std :: cout << exception.what() << std :: endl;
-    }
-    catch(RendererException& exception){
-      std :: cout << "Renderer Error : ";
+    }catch(GLContextException& exception){
+      std :: cout << "GL Context Error : ";
       #ifndef NDEBUG // or _DEBUG
-        std :: cout << "Line 35 in Window.cpp: ";
+        std :: cout << "Line 33 in Window.cpp: "; // SDL_GL_CreateContext()
       #endif // NDEBUG
       std :: cout << exception.what() << std :: endl;
     };
@@ -46,7 +42,6 @@ Application :: Application(){
 bool Application :: Run(){
   if(this -> active){
     SDL_Event event;
-    // while(this->active){
       while(SDL_PollEvent(&event)){
         switch(event.type){
           case SDL_QUIT:
@@ -60,7 +55,9 @@ bool Application :: Run(){
             };
         };
       };
-    // };
+    // glClearColor(0,0,0,1);
+    // glClear(GL_COLOR_BUFFER_BIT);
+    this->window->Update();
   };
   return this->active;
 };

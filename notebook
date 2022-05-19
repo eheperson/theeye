@@ -1,0 +1,59 @@
+
+cd ./external/sources
+# building SDL2 library
+cd ./SDL # corresponds to ./external/sources/SDL
+cmake -DCMAKE_BUILD_TYPE=Release \
+      -DCMAKE_INSTALL_PREFIX=../../sdl \
+      -S . \
+      -B ../../builds/sdl_build 
+
+cd ../../ #corresponds to ./external dir
+
+# option 1
+cmake --build ./builds/sdl_build -v
+cmake --install ./builds/sdl_build --prefix sdl
+
+# option 2
+cd ./builds/sdl_build
+make -j7 
+make install
+
+# building SDL_Image library
+cd ./SDL_Image # corresponds to ./external/sources/SDL_Image
+cmake -DCMAKE_BUILD_TYPE=Release \
+      -DCMAKE_INSTALL_PREFIX=../../sdl_image \
+      -DCMAKE_PREFIX_PATH=../../sdl \
+      -S . \
+      -B ../../builds/sdl_image_build 
+
+cd ../../ #corresponds to ./external dir
+
+# option 1
+cmake --build ./builds/sdl_image_build -v
+cmake --install ./builds/sdl_image_build --prefix sdl_image
+
+# option 2
+cd ./builds/sdl_image_build
+make -j7 
+make install
+
+
+# building GLAD library
+cd ./glad # corresponds to ./external/sources/glad
+
+cmake -DCMAKE_BUILD_TYPE=Release \
+      -DGLAD_INSTALL=ON \
+      -DCMAKE_PREFIX_PATH=../../glad \
+      -S . \
+      -B ../../builds/glad_build 
+
+cd ../../ #corresponds to ./external dir
+
+# option 1
+cmake --build ./builds/glad_build -v
+cmake --install ./builds/glad_build --prefix glad
+
+# option 2
+cd ./builds/sdl_image_build
+make -j7 
+make install

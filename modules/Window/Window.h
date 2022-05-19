@@ -15,16 +15,16 @@ class WindowException : public std::runtime_error{
         WindowException(const std :: string& error) : std :: runtime_error(error){};
 };
 
-class RendererException : public std::runtime_error{
+class GLContextException : public std::runtime_error{
     public:
-        RendererException(const std :: string& error) : std :: runtime_error(error){};
+        GLContextException(const std :: string& error) : std :: runtime_error(error){};
 };
 
 class Window{
     private:
         SDL_Window* sdlWindow;
-        SDL_Renderer* sdlRenderer;
-        void InitRenderer();
+        SDL_GLContext sdlGLContext;
+        void InitGLContext();
     public:
         Window(
             // centered window
@@ -41,6 +41,7 @@ class Window{
             int height
         );
         ~Window();
+        void Update();
 };
 
 
