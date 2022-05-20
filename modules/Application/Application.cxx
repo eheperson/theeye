@@ -1,14 +1,17 @@
 #include "Application.h"
+#include<SDL2/SDL.h>
+
 
 // initializing static object
-Application* Application :: applicationInstance = nullptr;
+// Application* Application :: applicationInstance = nullptr;
 
-Application* Application :: Instance(){
-  if(applicationInstance == nullptr){
-    Application::applicationInstance = new Application();
-  };
-  return Application :: applicationInstance;
-}
+// Application* Application :: Instance(){
+//   if(applicationInstance == nullptr){
+//     Application::applicationInstance = new Application();
+//     Application::applicationInstance -> SetState<TestState>();
+//   };
+//   return Application :: applicationInstance;
+// };
 
 Application :: Application(){
     this->active = true;
@@ -16,7 +19,7 @@ Application :: Application(){
       if(SDL_Init(SDL_INIT_FLAGS) != 0){
         throw ApplicationException(SDL_GetError());
       }else{
-        this->window = new Window("Test Window", 640, 480);
+        this -> window = new Window("Test Window", 640, 480);
       };
     }catch(ApplicationException& exception){
       std :: cout << "Application Error : ";
@@ -55,17 +58,25 @@ bool Application :: Run(){
             };
         };
       };
-    // glClearColor(0,0,0,1);
-    // glClear(GL_COLOR_BUFFER_BIT);
-    this->window->Update();
+    if(this->state != nullptr && this->state->Update()){  
+      this->window->Update();
+    };
   };
   return this->active;
 };
 
 void Application :: Stop(){
   this -> active = false;
-}
+};
+
+void Application :: SetState(GameStateBase* state){
+  if(this->state != nullptr){
+    this->state->Destroy();
+  }
+  this->state = state;
+  this->state->Init();
+};
 
 Application :: ~Application(){
   SDL_Quit();
-}
+};

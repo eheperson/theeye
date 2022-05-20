@@ -66,4 +66,36 @@ endif()
 
 # ------------------------------------------------------------------------------------------
 
+option(USE_TesterModule "TesterModule Module" ON)
+if(USE_TesterModule)
+    # To make use  of the new library we will add an add_subdirectory() call
+    # add_subdirectory(${TesterModule})
+    message(STATUS "TesterModule module Found")
+    add_definitions(-DUSE_TesterModule)
+    #
+    # set(TesterModule TestLib)
+    # set(TesterModule TesterModule/TesterModule.cxx)
+    #
+    add_library(TesterModule TesterModule/TesterModule.h TesterModule/TesterModule.cxx)
+    # link test module to find 3Rd dependencies
+    target_include_directories(TesterModule PUBLIC ${EXTRA_INCLUDE_DIRS}) 
+    target_link_directories(TesterModule PUBLIC ${EXTRA_LIB_DIRS})
+    target_link_libraries(TesterModule PUBLIC ${EXTRA_LINKS})
+    #
+    # to find theeye.h
+    target_include_directories(TesterModule PUBLIC ${PROJECT_BINARY_DIR})
+    #
+    # append in local scope
+    list(APPEND EXTRA_INCLUDE_DIRS "${MODULES_DIR}/TesterModule")
+    list(APPEND EXTRA_LIB_DIRS "TesterModule")
+    list(APPEND EXTRA_LINKS TesterModule)
+    # set in parent scope
+    set(EXTRA_INCLUDE_DIRS "${EXTRA_INCLUDE_DIRS}" PARENT_SCOPE)
+    set(EXTRA_LIB_DIRS "${EXTRA_LIB_DIRS}" PARENT_SCOPE)
+    set(EXTRA_LINKS "${EXTRA_LINKS}" PARENT_SCOPE)
+    #
+    install(TARGETS ${TesterModule} DESTINATION lib)
+    install(FILES ${MODULES_DIR}/TesterModule/TesterModule.h DESTINATION include)
+endif()
 
+# ------------------------------------------------------------------------------------------

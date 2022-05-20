@@ -9,3 +9,4 @@
 
 // source code now requires some definitions USE_MODULE_1
 #define USE_Application
+#define USE_TesterModule

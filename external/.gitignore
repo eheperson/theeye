@@ -1,3 +1,25 @@
-# ignoring sdl2 files
+# ignoring glm
+**/glm
+# **/sources/glm
+**/sources/glm_build
+
+# ignoring glfw
+**/glfw
+# **/sources/glfw
+**/sources/glfw_build
+
+# ignoring assimp
+**/assimp
+# **/sources/assimp
+**/sources/assimp_build
+
+# ignoring glad
+**/glad
+# **/sources/glad
+**/sources/glad_build
+
+# ignoring sdl2
 **/sdl2
+# **/sources/SDL
 **/sources/sdl2_build
+

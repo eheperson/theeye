@@ -1,8 +1,12 @@
+#include <cstdio>
+#include <cstdlib>
+
 #include<iostream>
 #include<string>
 #include<exception>
 #include<theeyeConfig.h>
 #include<SDL2/SDL.h>
+#include<glad/glad.h>
 
 #ifndef WINDOW_H
 #define WINDOW_H

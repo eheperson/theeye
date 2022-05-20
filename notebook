@@ -57,3 +57,42 @@ cmake --install ./builds/glad_build --prefix glad
 cd ./builds/sdl_image_build
 make -j7 
 make install
+
+# --------------------------------------------------------------------------------------------
+# --- GLM
+cd ./external/sources/glm
+#
+cmake -DCMAKE_BUILD_TYPE=Release \
+      -DCMAKE_INSTALL_PREFIX=../../glm \
+      -S . \
+      -B ../glm_build 
+#
+cd ../glm_build
+make -j7 
+make install
+
+# --------------------------------------------------------------------------------------------
+# --- GLFW
+cd ./external/sources/glfw
+#
+cmake -DCMAKE_BUILD_TYPE=Release \
+      -DCMAKE_INSTALL_PREFIX=../../glfw \
+      -S . \
+      -B ../glfw_build 
+#
+cd ../glfw_build
+make -j7 
+make install
+
+# --------------------------------------------------------------------------------------------
+# --- ASSIMP
+cd ./external/sources/assimp
+#
+cmake -DCMAKE_BUILD_TYPE=Release \
+      -DCMAKE_INSTALL_PREFIX=../../assimp \
+      -S . \
+      -B ../assimp_build 
+#
+cd ../assimp_build
+make -j7 
+make install

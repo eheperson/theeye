@@ -9,6 +9,7 @@ project(rppp VERSION 1.0.0)
 # C++ standards declerations must be above the call to add_executable
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
+# set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
 
 # Specify C Standards
 # C standards declerations must be above the call to add_executable
@@ -53,6 +54,9 @@ configure_file(theeyeConfig.h.in theeyeConfig.h)
 # add the executable
 add_executable(${CMAKE_PROJECT_NAME} main.cpp)
 # add_executable(temp temp.cpp) #example to add new executable : Step1
+
+find_package(Threads REQUIRED)
+list(APPEND ${EXTRA_LINKS} ${CMAKE_THREAD_LIBS_INIT})
 
 # add the binary tree to the search path for include files# so that we will find rppfConfig.h
 target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_BINARY_DIR})
