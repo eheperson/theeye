@@ -1,7 +1,5 @@
 # ignoring out directory
 **/out
-**/external/builds
-**/external/sdl
 
 .vscode
 !.vscode/launch.json
