@@ -13,3 +13,6 @@
 [submodule "external/sources/assimp"]
 	path = external/sources/assimp
 	url = git@github.com:assimp/assimp.git
+[submodule "external/sources/-f"]
+	path = external/sources/-f
+	url = git@github.com:assimp/assimp.git

@@ -1,5 +1,13 @@
 
 cd ./external/sources
+git submodule add git@github.com:Dav1dde/glad.git
+git submodule add git@github.com:assimp/assimp.git
+git submodule add git@github.com:glfw/glfw.git
+git submodule add git@github.com:g-truc/glm.git
+git submodule add git@github.com:libsdl-org/SDL.git
+
+
+cd ./external/sources
 # building SDL2 library
 cd ./SDL # corresponds to ./external/sources/SDL
 cmake -DCMAKE_BUILD_TYPE=Release \
