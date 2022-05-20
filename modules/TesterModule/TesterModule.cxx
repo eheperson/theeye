@@ -4,6 +4,7 @@ TestState :: TestState(Application* app) : GameState(app) {};
 
 bool TestState :: Init(){
     glClearColor(1,0,0,1);
+    Shader test("test_shader.vert", "test_shader.frag");
     return true;
 };
 
@@ -32,6 +33,7 @@ TestState2 :: TestState2(Application* app) : GameState(app){};
 
 bool TestState2 :: Init(){
     glClearColor(0,0,1,1);
+
     return true;
 };
 

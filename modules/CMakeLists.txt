@@ -66,6 +66,40 @@ endif()
 
 # ------------------------------------------------------------------------------------------
 
+option(USE_Shader "Shader Module" ON)
+if(USE_Shader)
+    # To make use  of the new library we will add an add_subdirectory() call
+    # add_subdirectory(${Shader})
+    message(STATUS "Shader module Found")
+    add_definitions(-DUSE_Shader)
+    #
+    # set(Shader TestLib)
+    # set(Shader Shader/Shader.cxx)
+    #
+    add_library(Shader Shader/Shader.h Shader/Shader.cxx)
+    # link test module to find 3Rd dependencies
+    target_include_directories(Shader PUBLIC ${EXTRA_INCLUDE_DIRS}) 
+    target_link_directories(Shader PUBLIC ${EXTRA_LIB_DIRS})
+    target_link_libraries(Shader PUBLIC ${EXTRA_LINKS})
+    #
+    # to find theeye.h
+    target_include_directories(Shader PUBLIC ${PROJECT_BINARY_DIR})
+    #
+    # append in local scope
+    list(APPEND EXTRA_INCLUDE_DIRS "${MODULES_DIR}/Shader")
+    list(APPEND EXTRA_LIB_DIRS "Shader")
+    list(APPEND EXTRA_LINKS Shader)
+    # set in parent scope
+    set(EXTRA_INCLUDE_DIRS "${EXTRA_INCLUDE_DIRS}" PARENT_SCOPE)
+    set(EXTRA_LIB_DIRS "${EXTRA_LIB_DIRS}" PARENT_SCOPE)
+    set(EXTRA_LINKS "${EXTRA_LINKS}" PARENT_SCOPE)
+    #
+    install(TARGETS ${Shader} DESTINATION lib)
+    install(FILES ${MODULES_DIR}/Shader/Shader.h DESTINATION include)
+endif()
+
+# ------------------------------------------------------------------------------------------
+
 option(USE_TesterModule "TesterModule Module" ON)
 if(USE_TesterModule)
     # To make use  of the new library we will add an add_subdirectory() call
