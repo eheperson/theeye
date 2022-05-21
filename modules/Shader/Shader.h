@@ -13,6 +13,7 @@ class Shader{
             std::string fragmentFileName
         );
         bool Use();
+        GLint getAttribute(std::string name);
     private:
         std::ifstream vertexFile;
         std::ifstream fragmentFile;

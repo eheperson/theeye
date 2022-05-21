@@ -100,6 +100,40 @@ endif()
 
 # ------------------------------------------------------------------------------------------
 
+option(USE_Drawable "Drawable Module" ON)
+if(USE_Drawable)
+    # To make use  of the new library we will add an add_subdirectory() call
+    # add_subdirectory(${Drawable})
+    message(STATUS "Drawable module Found")
+    add_definitions(-DUSE_Drawable)
+    #
+    # set(Drawable TestLib)
+    # set(Drawable Drawable/Drawable.cxx)
+    #
+    add_library(Drawable Drawable/Drawable.h Drawable/Drawable.cxx)
+    # link test module to find 3Rd dependencies
+    target_include_directories(Drawable PUBLIC ${EXTRA_INCLUDE_DIRS}) 
+    target_link_directories(Drawable PUBLIC ${EXTRA_LIB_DIRS})
+    target_link_libraries(Drawable PUBLIC ${EXTRA_LINKS})
+    #
+    # to find theeye.h
+    target_include_directories(Drawable PUBLIC ${PROJECT_BINARY_DIR})
+    #
+    # append in local scope
+    list(APPEND EXTRA_INCLUDE_DIRS "${MODULES_DIR}/Drawable")
+    list(APPEND EXTRA_LIB_DIRS "Drawable")
+    list(APPEND EXTRA_LINKS Drawable)
+    # set in parent scope
+    set(EXTRA_INCLUDE_DIRS "${EXTRA_INCLUDE_DIRS}" PARENT_SCOPE)
+    set(EXTRA_LIB_DIRS "${EXTRA_LIB_DIRS}" PARENT_SCOPE)
+    set(EXTRA_LINKS "${EXTRA_LINKS}" PARENT_SCOPE)
+    #
+    install(TARGETS ${Drawable} DESTINATION lib)
+    install(FILES ${MODULES_DIR}/Drawable/Drawable.h DESTINATION include)
+endif()
+
+# ------------------------------------------------------------------------------------------
+
 option(USE_TesterModule "TesterModule Module" ON)
 if(USE_TesterModule)
     # To make use  of the new library we will add an add_subdirectory() call

@@ -28,6 +28,11 @@ bool Shader :: Use(){
     return this->ready;
 };
 
+GLint Shader :: getAttribute(std::string name){
+    // return the location of an attribute
+    return glGetAttribLocation(this->shaderProgram, name.c_str());
+};
+
 int Shader :: Load(){
     this->vertexFile.open(this->vertexFileName, std::ios::in);
     if(!vertexFile)
@@ -69,7 +74,7 @@ int Shader :: Compile(){
         char* vertexCompileLog = (char*)malloc(maxLength);
         // Return the information log for a shader object
         glGetShaderInfoLog(this->vertexShader, maxLength, (GLsizei*)&maxLength, vertexCompileLog);
-        std::cout << "Vertex shared error : " << std::endl << vertexCompileLog << std::endl << std::endl;
+        std::cout << "Vertex shader error : " << std::endl << vertexCompileLog << std::endl << std::endl;
         free(vertexCompileLog);
         return -1;
     };
@@ -94,7 +99,7 @@ int Shader :: Compile(){
         char* fragmentCompileLog = (char*)malloc(maxLength);
         // Return the information log for a shader object
         glGetShaderInfoLog(this->fragmentShader, maxLength, (GLsizei*)&maxLength, fragmentCompileLog);
-        std::cout << "Fragment shared error : " << std::endl << fragmentCompileLog << std::endl << std::endl;
+        std::cout << "Fragment shader error : " << std::endl << fragmentCompileLog << std::endl << std::endl;
         free(fragmentCompileLog);
         return -2;
     };
@@ -108,6 +113,7 @@ int Shader :: Link(){
 
     glAttachShader(this->shaderProgram, this->vertexShader);
     glAttachShader(this->shaderProgram, this->fragmentShader);
+    
     glLinkProgram(this->shaderProgram);
 
     GLint linked;
@@ -118,7 +124,7 @@ int Shader :: Link(){
         glGetProgramiv(this->shaderProgram, GL_INFO_LOG_LENGTH, (GLint*)&maxLength);
         char* programLinkLog = (char*)malloc(maxLength);
         glGetShaderInfoLog(this->shaderProgram, maxLength, (GLsizei*)&maxLength, programLinkLog);
-        std::cout << "Fragment shared error : " << std::endl << programLinkLog << std::endl << std::endl;
+        std::cout << "Program compilation : " << std::endl << programLinkLog << std::endl << std::endl;
         free(programLinkLog);
         return -1;
     };

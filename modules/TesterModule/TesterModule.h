@@ -1,14 +1,29 @@
 #include<Application.h>
 #include<Shader.h>
+#include<Drawable.h>
 
-#include<SDL2/SDL.h>
-#include<glad/glad.h>
+
+#ifndef TESTSHAPE_H
+#define TESTSHAPE_H
+
+class TestShape : public Drawable{
+    private:
+        GLint posAtt; //position attribute
+        GLint colAtt; // color attribute 
+
+    public:
+        TestShape(Shader* shader);
+        ~TestShape();
+};
+
+#endif
 
 #ifndef TESTSTATE_H
 #define TESTSTATE_H
 class TestState : public GameState{
     private:
-        // pass
+        Shader* shader;
+        TestShape* testShape;
     public:
         TestState(Application* app);
         bool Init();
@@ -34,3 +49,4 @@ class TestState2 : public GameState{
 
 };
 #endif //TESTSTATE2
+
