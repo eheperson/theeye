@@ -1,5 +1,5 @@
 #include<glad/glad.h>
-
+#include<glm/gtc/type_ptr.hpp>
 #include "Shader.h"
 
 Shader :: Shader(std::string vertexFileName, std::string fragmentFileName){
@@ -31,6 +31,19 @@ bool Shader :: Use(){
 GLint Shader :: getAttribute(std::string name){
     // return the location of an attribute
     return glGetAttribLocation(this->shaderProgram, name.c_str());
+};
+
+GLint Shader :: getUniformLocation(std::string name){
+    return glGetUniformLocation(this->shaderProgram, name.c_str());
+};
+
+void Shader :: setUniformMatrix(GLint location, glm::mat4 matrix){
+    glUniformMatrix4fv(
+        location, 
+        1,
+        GL_FALSE,
+        glm::value_ptr(matrix)
+    );
 };
 
 int Shader :: Load(){

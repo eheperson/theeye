@@ -36,12 +36,12 @@ if(GIT_FOUND AND EXISTS "${PROJECT_SOURCE_DIR}/.git")
 endif()
 #------------------------------------------------------------------------------------------------------------
 # --- OpenGL
-find_package(OpenGL REQUIRED)
-if(OpenGL_FOUND)
-    # pass
-else()
-    message(FATAL_ERROR "no OpenGL, sad day")
-endif()
+# find_package(OpenGL REQUIRED)
+# if(OpenGL_FOUND)
+#     # pass
+# else()
+#     message(FATAL_ERROR "no OpenGL, sad day")
+# endif()
 #
 #------------------------------------------------------------------------------------------------------------
 # --- GLM
@@ -52,8 +52,9 @@ endif()
 # --- Find GLM
 find_package(glm REQUIRED PATHS "${GLM_BINARY_DIR}" NO_DEFAULT_PATH)
 if(glm_FOUND)
-    message(STATUS "GLM included at ${GLM_INCLUDE_DIRS}")
-    # not required for now
+    message(STATUS "GLM found at ${GLM_BINARY_DIR}")
+    list(APPEND EXTRA_INCLUDE_DIRS "${GLM_BINARY_DIR}/include")
+    set(EXTRA_INCLUDE_DIRS "${EXTRA_INCLUDE_DIRS}" PARENT_SCOPE)
 else()
     message(FATAL_ERROR "no glm, sad day")
 endif()

@@ -134,6 +134,74 @@ endif()
 
 # ------------------------------------------------------------------------------------------
 
+option(USE_Camera "Camera Module" ON)
+if(USE_Camera)
+    # To make use  of the new library we will add an add_subdirectory() call
+    # add_subdirectory(${Camera})
+    message(STATUS "Camera module Found")
+    add_definitions(-DUSE_Camera)
+    #
+    # set(Camera TestLib)
+    # set(Camera Camera/Camera.cxx)
+    #
+    add_library(Camera Camera/Camera.h Camera/Camera.cxx)
+    # link test module to find 3Rd dependencies
+    target_include_directories(Camera PUBLIC ${EXTRA_INCLUDE_DIRS}) 
+    target_link_directories(Camera PUBLIC ${EXTRA_LIB_DIRS})
+    target_link_libraries(Camera PUBLIC ${EXTRA_LINKS})
+    #
+    # to find theeye.h
+    target_include_directories(Camera PUBLIC ${PROJECT_BINARY_DIR})
+    #
+    # append in local scope
+    list(APPEND EXTRA_INCLUDE_DIRS "${MODULES_DIR}/Camera")
+    list(APPEND EXTRA_LIB_DIRS "Camera")
+    list(APPEND EXTRA_LINKS Camera)
+    # set in parent scope
+    set(EXTRA_INCLUDE_DIRS "${EXTRA_INCLUDE_DIRS}" PARENT_SCOPE)
+    set(EXTRA_LIB_DIRS "${EXTRA_LIB_DIRS}" PARENT_SCOPE)
+    set(EXTRA_LINKS "${EXTRA_LINKS}" PARENT_SCOPE)
+    #
+    install(TARGETS ${Camera} DESTINATION lib)
+    install(FILES ${MODULES_DIR}/Camera/Camera.h DESTINATION include)
+endif()
+
+# ------------------------------------------------------------------------------------------
+
+option(USE_RoomCube "RoomCube Module" ON)
+if(USE_RoomCube)
+    # To make use  of the new library we will add an add_subdirectory() call
+    # add_subdirectory(${RoomCube})
+    message(STATUS "RoomCube module Found")
+    add_definitions(-DUSE_RoomCube)
+    #
+    # set(RoomCube TestLib)
+    # set(RoomCube RoomCube/RoomCube.cxx)
+    #
+    add_library(RoomCube RoomCube/RoomCube.h RoomCube/RoomCube.cxx)
+    # link test module to find 3Rd dependencies
+    target_include_directories(RoomCube PUBLIC ${EXTRA_INCLUDE_DIRS}) 
+    target_link_directories(RoomCube PUBLIC ${EXTRA_LIB_DIRS})
+    target_link_libraries(RoomCube PUBLIC ${EXTRA_LINKS})
+    #
+    # to find theeye.h
+    target_include_directories(RoomCube PUBLIC ${PROJECT_BINARY_DIR})
+    #
+    # append in local scope
+    list(APPEND EXTRA_INCLUDE_DIRS "${MODULES_DIR}/RoomCube")
+    list(APPEND EXTRA_LIB_DIRS "RoomCube")
+    list(APPEND EXTRA_LINKS RoomCube)
+    # set in parent scope
+    set(EXTRA_INCLUDE_DIRS "${EXTRA_INCLUDE_DIRS}" PARENT_SCOPE)
+    set(EXTRA_LIB_DIRS "${EXTRA_LIB_DIRS}" PARENT_SCOPE)
+    set(EXTRA_LINKS "${EXTRA_LINKS}" PARENT_SCOPE)
+    #
+    install(TARGETS ${RoomCube} DESTINATION lib)
+    install(FILES ${MODULES_DIR}/RoomCube/RoomCube.h DESTINATION include)
+endif()
+
+# ------------------------------------------------------------------------------------------
+
 option(USE_TesterModule "TesterModule Module" ON)
 if(USE_TesterModule)
     # To make use  of the new library we will add an add_subdirectory() call
