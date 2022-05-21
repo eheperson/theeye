@@ -7,6 +7,8 @@ Drawable :: Drawable(){
     this->vbo = 0;
     this->ebo = 0;
 
+    this->textureID = 0;
+
     glGenVertexArrays(1, &this->vao);
 };
 
@@ -64,6 +66,50 @@ void Drawable :: loadElements(std::vector<GLuint> data){
     );
 };
 
+void Drawable :: loadTexture(std::string fileName){
+    this->texture = SDL_LoadBMP(fileName.c_str());
+    if(this->texture){
+        glGenTextures(1, &this->textureID);
+        // glGenTextures(15, <list_of_textures>;
+
+        if(this->textureID){
+
+            glBindTexture(GL_TEXTURE_2D, this->textureID);
+
+            // specify a 2 dimensional texture image
+            glTexImage2D(
+                GL_TEXTURE_2D, 
+                0, 
+                GL_RGB, 
+                this->texture->w, 
+                this->texture->h, 
+                0, 
+                GL_BGR,
+                GL_UNSIGNED_BYTE,
+                this->texture->pixels
+            );
+
+            // set texture parameters
+            glTexParameteri(
+                GL_TEXTURE_2D,
+                GL_TEXTURE_MIN_FILTER,
+                GL_LINEAR_MIPMAP_LINEAR // GL_NEAREST
+            );
+
+            // set texture parameters
+            glTexParameteri(
+                GL_TEXTURE_2D,
+                GL_TEXTURE_MAG_FILTER,
+                GL_LINEAR // GL_NEAREST
+            );
+
+            glGenerateMipmap(GL_TEXTURE_2D);
+            
+            glBindTexture(GL_TEXTURE_2D, 0);
+        };
+    };
+};
+
 void Drawable :: bindVAO(){
     glBindVertexArray(this->vao);
 };
@@ -77,6 +123,9 @@ bool Drawable :: Draw(){
         return false;
     };
     this->bindVAO();
+
+    glBindTexture(GL_TEXTURE_2D, this->textureID);
+
     // render primitives from arraya data
     glDrawElements(
         GL_TRIANGLES,
@@ -84,6 +133,7 @@ bool Drawable :: Draw(){
         GL_UNSIGNED_INT,
         0
     );
+    glBindTexture(GL_TEXTURE_2D, 0);
     this->unbindVAO();
     return true;
 };
@@ -97,5 +147,8 @@ Drawable :: ~Drawable(){
     };
     if(this->vao){
         glDeleteVertexArrays(1, &this->vao);
+    };
+    if(this->textureID){
+        SDL_FreeSurface(this->texture);
     };
 };

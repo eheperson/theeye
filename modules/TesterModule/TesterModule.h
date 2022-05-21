@@ -19,6 +19,7 @@ class TestShape : public Drawable{
     private:
         GLint posAtt; //position attribute
         GLint colAtt; // color attribute 
+        GLint uvAtt;
 
     public:
         TestShape(Shader* shader);
@@ -38,6 +39,8 @@ class TestState : public GameState{
 
         glm::vec3 cameraRotation;
         glm::vec3 cameraVelocity;
+
+        GLint hasTextureUniform;
 
     public:
         TestState(Application* app);
