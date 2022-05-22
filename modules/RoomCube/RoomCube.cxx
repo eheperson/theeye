@@ -3,7 +3,7 @@
 #include "RoomCube.h"
 
 GLfloat roomVerticies[] = { // vertex data
-//    Positions                     Colors
+//        Positions                     Colors
     -10.0f,  10.0f, -10.0f,        1.0f, 0.0f, 0.0f, // top-left-front (datapoint-0 or vertice-0)
      10.0f,  10.0f, -10.0f,        0.0f, 1.0f, 0.0f, // top-right-front (datapoint-1 or vertice-1)
      10.0f, -10.0f, -10.0f,        0.0f, 0.0f, 1.0f, // bottom-right-front (datapoint-2 or vertice-2)

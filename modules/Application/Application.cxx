@@ -19,10 +19,13 @@ Application :: Application(){
       if(SDL_Init(SDL_INIT_FLAGS) != 0){
         throw ApplicationException(SDL_GetError());
       }else{
-        this -> window = new Window("Test Window", 1024, 720);
+        SDL_GL_SetAttribute(SDL_GL_MULTISAMPLEBUFFERS, 1);
+        SDL_GL_SetAttribute(SDL_GL_MULTISAMPLESAMPLES, 16);
+        this -> window = new Window("Test Window", 800, 600);
         if (this->window == NULL){
             std::cout << "Failed to create SDL window" << std::endl;
         }else{
+          glEnable(GL_MULTISAMPLE);
           glEnable(GL_DEPTH_TEST);
         };
       };

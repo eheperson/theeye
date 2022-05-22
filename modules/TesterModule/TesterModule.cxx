@@ -33,13 +33,9 @@ bool TestState :: Update(){
 
     glUniform1i(this->hasTextureUniform, true);
     this-testShape->Draw();
-
     glUniform1i(this->hasTextureUniform, false);
-
     this->objTest->Draw();
-
     this->room->Draw();
-
     this->camera->Update();
 
     const uint8_t* state = SDL_GetKeyboardState(NULL);
