@@ -4,15 +4,15 @@
 
 GLfloat roomVerticies[] = { // vertex data
 //    Positions                     Colors
-    -10.0f,  0.5f, -10.0f,        1.0f, 0.0f, 0.0f, // top-left-front (datapoint-0 or vertice-0)
-     10.0f,  0.5f, -10.0f,        0.0f, 1.0f, 0.0f, // top-right-front (datapoint-1 or vertice-1)
-     10.0f, -0.5f, -10.0f,        0.0f, 0.0f, 1.0f, // bottom-right-front (datapoint-2 or vertice-2)
-    -10.0f, -0.5f, -10.0f,        1.0f, 1.0f, 1.0f, // bottom-left-front (datapoint-3 or vertice-3)
+    -10.0f,  10.0f, -10.0f,        1.0f, 0.0f, 0.0f, // top-left-front (datapoint-0 or vertice-0)
+     10.0f,  10.0f, -10.0f,        0.0f, 1.0f, 0.0f, // top-right-front (datapoint-1 or vertice-1)
+     10.0f, -10.0f, -10.0f,        0.0f, 0.0f, 1.0f, // bottom-right-front (datapoint-2 or vertice-2)
+    -10.0f, -10.0f, -10.0f,        1.0f, 1.0f, 1.0f, // bottom-left-front (datapoint-3 or vertice-3)
 
-    -10.0f,  0.5f,  10.0f,        1.0f, 0.0f, 0.0f, // top-left-back (datapoint-4 or vertice-4)
-     10.0f,  0.5f,  10.0f,        0.0f, 1.0f, 0.0f, // top-right-back (datapoint-5 or vertice-5)
-     10.0f, -0.5f,  10.0f,        0.0f, 0.0f, 1.0f, // bottom-right-back (datapoint-6 or vertice-6)
-    -10.0f, -0.5f,  10.0f,        1.0f, 1.0f, 1.0f  // bottom-left-back (datapoint-7 or vertice-7)
+    -10.0f,  10.0f,  10.0f,        1.0f, 0.0f, 0.0f, // top-left-back (datapoint-4 or vertice-4)
+     10.0f,  10.0f,  10.0f,        0.0f, 1.0f, 0.0f, // top-right-back (datapoint-5 or vertice-5)
+     10.0f, -10.0f,  10.0f,        0.0f, 0.0f, 1.0f, // bottom-right-back (datapoint-6 or vertice-6)
+    -10.0f, -10.0f,  10.0f,        1.0f, 1.0f, 1.0f  // bottom-left-back (datapoint-7 or vertice-7)
 };
 
 GLuint roomElements[] = { // element data

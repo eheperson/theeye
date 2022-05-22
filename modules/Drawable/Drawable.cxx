@@ -103,8 +103,12 @@ void Drawable :: loadTexture(std::string fileName){
                 GL_LINEAR // GL_NEAREST
             );
 
+            GLfloat largestAnisotropy;
+            glGetFloatv(GL_MAX_TEXTURE_MAX_ANISOTROPY, &largestAnisotropy);
+            glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY, largestAnisotropy);
+
             glGenerateMipmap(GL_TEXTURE_2D);
-            
+
             glBindTexture(GL_TEXTURE_2D, 0);
         };
     };

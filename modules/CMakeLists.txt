@@ -168,6 +168,40 @@ endif()
 
 # ------------------------------------------------------------------------------------------
 
+option(USE_ObjLoader "ObjLoader Module" ON)
+if(USE_ObjLoader)
+    # To make use  of the new library we will add an add_subdirectory() call
+    # add_subdirectory(${ObjLoader})
+    message(STATUS "ObjLoader module Found")
+    add_definitions(-DUSE_ObjLoader)
+    #
+    # set(ObjLoader TestLib)
+    # set(ObjLoader ObjLoader/ObjLoader.cxx)
+    #
+    add_library(ObjLoader ObjLoader/ObjLoader.h ObjLoader/ObjLoader.cxx)
+    # link test module to find 3Rd dependencies
+    target_include_directories(ObjLoader PUBLIC ${EXTRA_INCLUDE_DIRS}) 
+    target_link_directories(ObjLoader PUBLIC ${EXTRA_LIB_DIRS})
+    target_link_libraries(ObjLoader PUBLIC ${EXTRA_LINKS})
+    #
+    # to find theeye.h
+    target_include_directories(ObjLoader PUBLIC ${PROJECT_BINARY_DIR})
+    #
+    # append in local scope
+    list(APPEND EXTRA_INCLUDE_DIRS "${MODULES_DIR}/ObjLoader")
+    list(APPEND EXTRA_LIB_DIRS "ObjLoader")
+    list(APPEND EXTRA_LINKS ObjLoader)
+    # set in parent scope
+    set(EXTRA_INCLUDE_DIRS "${EXTRA_INCLUDE_DIRS}" PARENT_SCOPE)
+    set(EXTRA_LIB_DIRS "${EXTRA_LIB_DIRS}" PARENT_SCOPE)
+    set(EXTRA_LINKS "${EXTRA_LINKS}" PARENT_SCOPE)
+    #
+    install(TARGETS ${ObjLoader} DESTINATION lib)
+    install(FILES ${MODULES_DIR}/ObjLoader/ObjLoader.h DESTINATION include)
+endif()
+
+# ------------------------------------------------------------------------------------------
+
 option(USE_RoomCube "RoomCube Module" ON)
 if(USE_RoomCube)
     # To make use  of the new library we will add an add_subdirectory() call

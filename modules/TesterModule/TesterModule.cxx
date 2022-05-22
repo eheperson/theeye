@@ -13,6 +13,7 @@ bool TestState :: Init(){
 
 
     this->testShape = new TestShape(this->shader);
+    this->objTest = new ObjLoader(this->shader, "test.obj");
     this->room = new RoomCube(this->shader);
 
     this->camera = new Camera(this->shader, 800, 600);
@@ -34,10 +35,11 @@ bool TestState :: Update(){
     this-testShape->Draw();
 
     glUniform1i(this->hasTextureUniform, false);
-    this-testShape->Draw();
 
+    this->objTest->Draw();
 
     this->room->Draw();
+
     this->camera->Update();
 
     const uint8_t* state = SDL_GetKeyboardState(NULL);
@@ -176,11 +178,11 @@ TestState2 :: ~TestState2(){};
 
 
 GLfloat vData[] = { // vertex data
-//    positions            colors
-    -0.5f,  0.5f,       1.0f, 0.0f, 0.0f, 0.0f, 0.0f, // top-left
-     0.5f,  0.5f,       0.0f, 1.0f, 0.0f, 5.0f, 0.0f, // top-right
-     0.5f, -0.5f,       0.0f, 0.0f, 1.0f, 5.0f, 5.0f, // bottom-right
-    -0.5f, -0.5f,       1.0f, 1.0f, 1.0f, 0.0f, 5.0f  // bottom-left 
+//    positions            colors              uv coordinates
+    -0.5f,  0.5f,       1.0f, 0.0f, 0.0f,       0.0f, 0.0f, // top-left
+     0.5f,  0.5f,       0.0f, 1.0f, 0.0f,       1.0f, 0.0f, // top-right
+     0.5f, -0.5f,       0.0f, 0.0f, 1.0f,       1.0f, 1.0f, // bottom-right
+    -0.5f, -0.5f,       1.0f, 1.0f, 1.0f,       0.0f, 1.0f  // bottom-left 
 };
 
 GLuint eData[] = { // element data

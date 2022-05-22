@@ -3,7 +3,7 @@
 #include<Drawable.h>
 #include<Camera.h>
 #include<RoomCube.h>
-
+#include<ObjLoader.h>
 // #include<glm/glm.hpp>
 // #include<glm/gtc/type_vec.hpp>
 // #include<glm/gtx/rotate_vector.hpp>
@@ -36,6 +36,7 @@ class TestState : public GameState{
         TestShape* testShape;
         RoomCube* room;
         Camera* camera;
+        ObjLoader* objTest;
 
         glm::vec3 cameraRotation;
         glm::vec3 cameraVelocity;
