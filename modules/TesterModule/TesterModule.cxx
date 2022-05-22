@@ -29,8 +29,50 @@ bool TestState :: Init(){
 
 bool TestState :: Update(){
 
+    // clear
+    // SDL_GLContext cont = SDL_GL_GetCurrentContext();
+    // setup your left view projection:
+    // glMatrixMode(GL_PROJECTION);
+    // glLoadIdentity();
+    // glViewport(0,0,400, 600);
+    // glOrtho(0, 800, 600, 0, -1, 1);
+    // glMatrixMode(GL_MODELVIEW);
+    // draw
+    // setup your right view projection:
+    // glMatrixMode(GL_PROJECTION);
+    // glLoadIdentity();
+    // glViewport(400,0,800, 600);
+    // glOrtho(0, 800, 600, 0, -1, 1);
+    // glMatrixMode(GL_MODELVIEW);
+    // draw
+
+
+
     glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+    // setup your left view projection:
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    glViewport(0,0,400, 600);
+    glOrtho(0, 800, 600, 0, -1, 1);
+    glMatrixMode(GL_MODELVIEW);
+
+    // draw left view
+    glUniform1i(this->hasTextureUniform, true);
+    this-testShape->Draw();
+    glUniform1i(this->hasTextureUniform, false);
+    this->objTest->Draw();
+    this->room->Draw();
+    this->camera->Update();
+
+    // setup your right view projection:
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    glViewport(400,0,400, 600);
+    glOrtho(0, 800, 600, 0, -1, 1);
+    glMatrixMode(GL_MODELVIEW);
+    
+    // draw right view
     glUniform1i(this->hasTextureUniform, true);
     this-testShape->Draw();
     glUniform1i(this->hasTextureUniform, false);
