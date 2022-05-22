@@ -35,7 +35,8 @@ class TestState : public GameState{
         Shader* shader;
         TestShape* testShape;
         RoomCube* room;
-        Camera* camera;
+        Camera* camera1;
+        Camera* camera2;
         ObjLoader* objTest;
 
         glm::vec3 cameraRotation;

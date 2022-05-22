@@ -21,7 +21,7 @@ class Camera{
 
     public:
 
-        Camera(Shader* shader, float w, float h);
+        Camera(Shader* shader, float w, float h, float degree);
 
         void SetShader(Shader* shader);
 

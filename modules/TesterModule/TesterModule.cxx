@@ -16,8 +16,11 @@ bool TestState :: Init(){
     this->objTest = new ObjLoader(this->shader, "test.obj");
     this->room = new RoomCube(this->shader);
 
-    this->camera = new Camera(this->shader, 800, 600);
-    this->camera->SetTranslation(0, 0, 2);
+    this->camera1 = new Camera(this->shader, 800, 600, 54.0f);
+    this->camera2 = new Camera(this->shader, 800, 600, 54.0f);
+
+    this->camera1->SetTranslation(0, 0, 2);
+    this->camera2->SetTranslation(0, 0, 2);
     // this->camera->SetRotation(0,1,1,1);
 
     SDL_WarpMouseGlobal(500,500);// initialize mouse position
@@ -63,7 +66,7 @@ bool TestState :: Update(){
     glUniform1i(this->hasTextureUniform, false);
     this->objTest->Draw();
     this->room->Draw();
-    this->camera->Update();
+    this->camera1->Update();
 
     // setup your right view projection:
     glMatrixMode(GL_PROJECTION);
@@ -78,7 +81,7 @@ bool TestState :: Update(){
     glUniform1i(this->hasTextureUniform, false);
     this->objTest->Draw();
     this->room->Draw();
-    this->camera->Update();
+    this->camera2->Update();
 
     const uint8_t* state = SDL_GetKeyboardState(NULL);
 
@@ -103,7 +106,13 @@ bool TestState :: Update(){
     /* - - - - - - Translations - - - - - - - - - - */
     if(state[SDL_SCANCODE_A]){
         // this->camera->Translate(0.1f, 0, 0);
-        this->camera->Translate(
+        this->camera1->Translate(
+            -this->cameraVelocity.x*cos(glm::radians(this->cameraRotation.y)), 
+            0, 
+            -this->cameraVelocity.z*sin(glm::radians(this->cameraRotation.y))
+        );
+
+        this->camera2->Translate(
             -this->cameraVelocity.x*cos(glm::radians(this->cameraRotation.y)), 
             0, 
             -this->cameraVelocity.z*sin(glm::radians(this->cameraRotation.y))
@@ -112,7 +121,12 @@ bool TestState :: Update(){
     };
     if(state[SDL_SCANCODE_D]){
         // this->camera->Translate(-0.1f, 0, 0);
-        this->camera->Translate(
+        this->camera1->Translate(
+            this->cameraVelocity.x*cos(glm::radians(-this->cameraRotation.y)), 
+            0, 
+            this->cameraVelocity.z*sin(glm::radians(-this->cameraRotation.y))
+        );
+        this->camera2->Translate(
             this->cameraVelocity.x*cos(glm::radians(-this->cameraRotation.y)), 
             0, 
             this->cameraVelocity.z*sin(glm::radians(-this->cameraRotation.y))
@@ -121,7 +135,12 @@ bool TestState :: Update(){
     };
     if(state[SDL_SCANCODE_W]){
         // this->camera->Translate(0, 0, -0.1f);
-        this->camera->Translate(
+        this->camera1->Translate(
+            -this->cameraVelocity.x*sin(glm::radians(this->cameraRotation.y)), 
+            0, 
+            -this->cameraVelocity.z*cos(glm::radians(this->cameraRotation.y))
+        );
+        this->camera2->Translate(
             -this->cameraVelocity.x*sin(glm::radians(this->cameraRotation.y)), 
             0, 
             -this->cameraVelocity.z*cos(glm::radians(this->cameraRotation.y))
@@ -130,7 +149,12 @@ bool TestState :: Update(){
     };
     if(state[SDL_SCANCODE_S]){
         // this->camera->Translate(0, 0, 0.1f);
-        this->camera->Translate(
+        this->camera1->Translate(
+            this->cameraVelocity.x*sin(glm::radians(this->cameraRotation.y)), 
+            0, 
+            this->cameraVelocity.z*cos(glm::radians(this->cameraRotation.y))
+        );
+        this->camera2->Translate(
             this->cameraVelocity.x*sin(glm::radians(this->cameraRotation.y)), 
             0, 
             this->cameraVelocity.z*cos(glm::radians(this->cameraRotation.y))
@@ -172,9 +196,14 @@ bool TestState :: Update(){
     cameraRotation.x += MOUSE_SPEED * float(500 - yPositionMouse);
 
     
-    this->camera->SetRotation(0,1,1,1);
-    this->camera->Rotate(cameraRotation.x, 1, 0, 0);
-    this->camera->Rotate(cameraRotation.y, 0, 1, 0);
+    this->camera1->SetRotation(20,1,1,1);
+    this->camera1->Rotate(cameraRotation.x, 1, 0, 0);
+    this->camera1->Rotate(cameraRotation.y, 0, 1, 0);
+    // this->camera->Rotate(cameraRotation.z, 0, 0, 1);
+
+    this->camera2->SetRotation(10,1,1,1);
+    this->camera2->Rotate(cameraRotation.x, 1, 0, 0);
+    this->camera2->Rotate(cameraRotation.y, 0, 1, 0);
     // this->camera->Rotate(cameraRotation.z, 0, 0, 1);
     return true;
 };

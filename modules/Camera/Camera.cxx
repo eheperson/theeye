@@ -5,10 +5,10 @@
 #include "Camera.h"
 
 
-Camera :: Camera(Shader* shader, float w, float h){
+Camera :: Camera(Shader* shader, float w, float h, float degree){
     this->shader = shader;
     this->vpUniform = this->shader->getUniformLocation("mvpMatrix");
-    this->projectMatrix = glm::perspective(glm::radians(45.0f), w / h, 0.01f, 1000.0f);
+    this->projectMatrix = glm::perspective(glm::radians(degree), w / h, 0.01f, 1000.0f);
 };
 
 void Camera :: SetShader(Shader* shader){
