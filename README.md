@@ -1,6 +1,13 @@
 # TheEye
 AI powered VR application for Raspberry PI.
 
+---
+
+### Notes
+> AI not implemented yet
+> SDL2 needs to be migrated to SDL3 
+
+---
 
 ### Requirements:
 * Cmake
@@ -56,6 +63,10 @@ Here are the steps of building 3Rd dependenc from source and link it
     # configure
     cmake -DCMAKE_BUILD_TYPE=Release \
       -DCMAKE_INSTALL_PREFIX=../../sdl2 \
+      -DCMAKE_C_COMPILER=/usr/bin/gcc \
+      -DCMAKE_CXX_COMPILER=/usr/bin/g++ \
+      -DCMAKE_C_FLAGS="-Werror,-Wno-declaration-after-statement" \
+      -DCMAKE_CXX_FLAGS="-Wno-declaration-after-statement" \
       -S . \
       -B ../sdl2_build 
 ```

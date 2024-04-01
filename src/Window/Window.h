@@ -5,7 +5,7 @@
 #include<string>
 #include<exception>
 #include<theeyeConfig.h>
-#include<SDL2/SDL.h>
+#include<SDL3/SDL.h>
 #include<glad/glad.h>
 
 #ifndef WINDOW_H

@@ -49,7 +49,8 @@ void Window :: InitGLContext(){
     this->sdlGLContext = SDL_GL_CreateContext(this->sdlWindow);
     
     // Setup our function pointers
-    gladLoadGLLoader(SDL_GL_GetProcAddress);
+    // gladLoadGLLoader(SDL_GL_GetProcAddress);
+    gladLoadGLLoader((GLADloadproc)SDL_GL_GetProcAddress);
 
     // // Check OpenGL properties
     #ifndef NDEBUG // or _DEBUG
